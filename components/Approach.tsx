@@ -7,7 +7,7 @@ import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
 
 const Approach = () => {
   return (
-    <section className="w-full py-20">
+    <section className="w-full py-5 lg:py-20">
         <h1 className="heading">
             Minha <span className="text-purple">abordagem</span>
         </h1>

@@ -5,7 +5,7 @@ import { testimonials } from '@/data'
 const Clients = () => {
   return (
     <div>
-      <div className="py-20" id="depoimentos">
+      <div className="py-5 lg:py-20" id="depoimentos">
             <h1 className="heading">
             Depoimentos de alguns {' '}
                 <span className="text-purple">colegas de trabalho.</span>
@@ -14,7 +14,7 @@ const Clients = () => {
               <InfiniteMovingCards 
                 items={testimonials}
                 direction='right'
-                speed='slow'
+                speed='normal'
               />
             </div>
         </div>

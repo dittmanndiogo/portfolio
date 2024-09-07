@@ -22,7 +22,7 @@ export const navItems = [
       description: "",
       className: "lg:col-span-2 md:col-span-3 md:row-span-2",
       imgClassName: "",
-      titleClassName: "justify-start",
+      titleClassName: "justify-start pb-2",
       img: "",
       spareImg: "",
     },
@@ -70,7 +70,7 @@ export const navItems = [
     {
       id: 2,
       title: "Página de informações sobre Projetos Luminotécnicos.",
-      des: "Páginas completa de e informações sobre projetos de engenharia elétrica.",
+      des: "Páginas completa de informações sobre projetos de engenharia elétrica.",
       img: "/site-2.svg",
       iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
       link: "https://github.com/adrianhajdin/zoom-clone",
@@ -178,9 +178,11 @@ export const navItems = [
     {
       id: 1,
       img: "/git.svg",
+      url: "https://github.com/dittmanndiogo"
     },
     {
       id: 2,
       img: "/link.svg",
+      url: "https://www.linkedin.com/in/diogo-dittmann-81648b295/"
     },
   ];
