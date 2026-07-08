@@ -8,14 +8,19 @@ export const TextGenerateEffect = ({
   className,
   filter = true,
   duration = 0.5,
+  highlightWords = [],
 }: {
   words: string;
   className?: string;
   filter?: boolean;
   duration?: number;
+  highlightWords?: string[];
 }) => {
   const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
+  const wordsArray = words.split(" ");
+  const normalizedHighlights = new Set(
+    highlightWords.map((word) => word.toLocaleLowerCase("pt-BR")),
+  );
   useEffect(() => {
     animate(
       "span",
@@ -34,10 +39,15 @@ export const TextGenerateEffect = ({
     return (
       <motion.div ref={scope}>
         {wordsArray.map((word, idx) => {
+          const normalizedWord = word
+            .replace(/[.,!?;:]/g, "")
+            .toLocaleLowerCase("pt-BR");
+          const isHighlighted = normalizedHighlights.has(normalizedWord);
+
           return (
             <motion.span
               key={word + idx}
-              className={`${idx > 3 && idx < 5 ||idx > 5 && idx < 7 ? 'text-purple' : 'dark:text-white text-black'} opacity-0`}
+              className={`${isHighlighted ? "text-brand" : "dark:text-white text-black"} opacity-0`}
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}

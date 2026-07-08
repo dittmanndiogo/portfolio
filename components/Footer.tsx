@@ -5,6 +5,8 @@ import { FaLocationArrow } from "react-icons/fa";
 import { socialMedia } from "@/data";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="w-full pt-5 lg:pt-20 pb-10' id='contato">
       <div className="w-full absolute left-0 -bottom-72 min-h-96">
@@ -18,7 +20,7 @@ const Footer = () => {
       <div className="flex flex-col items-center">
         <h1 className="heading lg:max-w-[45vw]">
           Se gostou do trabalho, estou à disposição!{" "}
-          <span className="text-purple"> Me envie um email.</span>
+          <span className="text-brand"> Me envie um email.</span>
         </h1>
         <a href="mailto: dittmanndiogo1996@gmail.com" className="pt-4">
           <MagicButton
@@ -31,7 +33,7 @@ const Footer = () => {
 
       <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
         <p className="md:text-base tex-sm md:font-normal font-light">
-          Copyright © 2024 - Diogo Dittmann
+          Copyright © {currentYear} - Diogo Dittmann
         </p>
 
         <div className="flex items-center md:gap-3 gap-6 pt-4 pb-2">

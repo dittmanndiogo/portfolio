@@ -65,8 +65,7 @@ export const BentoGridItem = ({
         className
       )}
       style={{
-        background: 'rgb(2,0,36)',
-        backgroundColor: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(28,28,73,1) 35%, rgba(0,212,255,1) 100%)',
+        background: 'linear-gradient(135deg, #06131f 0%, #0b2230 58%, #083344 100%)',
       }}
     >
       <div className={`${id === 6  && 'flex justify-center'} h-full'`}>
@@ -111,16 +110,16 @@ export const BentoGridItem = ({
               <div className="flex flex-col gap-3 lg:gap-4">
                 {['Next.js','React.js',  'Typescript'].map(
                   (item) => (
-                    <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E]">{item}</span>
+                    <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#0B2230]">{item}</span>
                   )
                 )}
-                <span className="py-4 px-3 rounded-lg text-center bg-[#10132E]"/>
+                <span className="py-4 px-3 rounded-lg text-center bg-[#0B2230]"/>
               </div>
               <div className="flex flex-col gap-3 lg:gap-4">
-              <span className="py-4 px-3 rounded-lg text-center bg-[#10132E]"/>
+              <span className="py-4 px-3 rounded-lg text-center bg-[#0B2230]"/>
                 {['AWS', 'Python', 'Node.js'].map(
                   (item) => (
-                    <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E]">{item}</span>
+                    <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#0B2230]">{item}</span>
                   )
                 )}
               </div>
@@ -144,7 +143,7 @@ export const BentoGridItem = ({
                 title={copied ? 'Email copiado' : 'Copie meu Email'}
                 icon={<IoCopyOutline />}
                 position="left"
-                otherClasses="bg-[#161A31]"
+                otherClasses="bg-[#0F2530]"
                 handleClick={() => handleCLick()}
               />
             </div>

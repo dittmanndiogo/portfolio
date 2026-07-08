@@ -29,7 +29,7 @@ const config = {
       colors: {
         black: {
           DEFAULT: "#000",
-          100: "#000319",
+          100: "#020617",
           200: "rgba(17, 25, 40, 0.75)",
           300: "rgba(255, 255, 255, 0.125)",
         },
@@ -41,7 +41,11 @@ const config = {
         blue: {
           "100": "#E4ECFF",
         },
-        purple: "#CBACF9",
+        brand: {
+          DEFAULT: "#5EEAD4",
+          deep: "#0F766E",
+          glow: "#22D3EE",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

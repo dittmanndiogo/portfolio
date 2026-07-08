@@ -108,6 +108,13 @@ export const navItems = [
       title: "Desenvolvedor Fullstack.",
       img: "/adam.jpeg",
     },
+    {
+      quote:
+        "Trabalho com o Diogo a mais de 2 anos, ele sempre está procurando novos conhecimentos para melhorar suas habilidades. Além do conhecimento profundo em infraestrutura, arquitetura, ferramentas da AWS e React, amplo conhecimento na área de IA, ele sempre se mostrou um ótimo colega que agrega muito dentro do time ajudando os demais.",
+      name: "Guilherme Penso.",
+      title: "Desenvolvedor Fullstack.",
+      img: "/guilherme.png",
+    },
   ];
   
   export const companies = [

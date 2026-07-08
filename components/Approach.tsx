@@ -1,133 +1,126 @@
 "use client";
-import React from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { FaCheck, FaCode, FaLightbulb } from "react-icons/fa6";
 
+const steps = [
+  {
+    phase: "Fase 1",
+    title: "Análise e Planejamento",
+    description:
+      "Entendo os requisitos e necessidades e desenvolvo um plano detalhado para abordar a questão.",
+    icon: FaLightbulb,
+  },
+  {
+    phase: "Fase 2",
+    title: "Desenvolvimento e Implementação",
+    description:
+      "Crio a solução conforme o plano e realizo testes para garantir o funcionamento adequado da solução.",
+    icon: FaCode,
+  },
+  {
+    phase: "Fase 3",
+    title: "Entrega e Feedback",
+    description:
+      "Apresento o resultado e faço os ajustes finais para garantir que a solução atenda às necessidades.",
+    icon: FaCheck,
+  },
+];
 
 const Approach = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 65%"],
+  });
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+  });
+  const orbTop = useTransform(progress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section className="w-full py-5 lg:py-20">
+    <section className="relative w-full py-20">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-glow/[0.05] blur-[120px]" />
+
+      <div className="relative">
+        <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.28em] text-brand/70">
+          Do conceito à entrega
+        </p>
         <h1 className="heading">
-            Minha <span className="text-purple">abordagem</span>
+          Minha <span className="text-brand">abordagem</span>
         </h1>
-      <div className="my-20 flex flex-col lg:flex-row items-center justify-center w-full gap-4">
-        <Card 
-          title="Análise e Planejamento" 
-          description="Entendo os requisitos e necessidades e desenvolvo um plano detalhado para abordar a questão"
-          icon={<AceternityIcon order="Fase 1"/>}>
-            <CanvasRevealEffect
-              animationSpeed={5.1}
-              containerClassName="bg-emerald-900"
+        <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-relaxed text-white-100/70 md:text-base">
+          Um processo claro e colaborativo para transformar uma necessidade em
+          uma solução sólida.
+        </p>
+
+        <div ref={timelineRef} className="relative mx-auto mt-16 max-w-5xl">
+          <div className="absolute bottom-0 left-5 top-0 w-px bg-white/10 md:left-1/2 md:-translate-x-1/2">
+            <motion.div
+              className="absolute left-0 top-0 h-full w-px origin-top bg-gradient-to-b from-brand via-brand-glow to-brand"
+              style={{ scaleY: progress }}
             />
-        </Card>
-        <Card 
-          title="Desenvolvimento e Implementação" 
-          description="Crio a solução conforme o plano e realizo testes para garantir o funcionamento adequado da solução."
-          icon={<AceternityIcon order="Fase 2"/>}>
-            <CanvasRevealEffect
-              animationSpeed={3}
-              containerClassName="bg-black"
-              colors={[
-                [236, 72, 153],
-                [232, 121, 249],
-              ]}
-              dotSize={2}
+            <motion.div
+              aria-hidden="true"
+              className="absolute -left-[5px] h-[11px] w-[11px] -translate-y-1/2 rounded-full bg-brand shadow-[0_0_18px_4px_rgba(94,234,212,0.65)]"
+              style={{ top: orbTop }}
             />
-        </Card>
-        <Card 
-          title="Entrega e Feedback" 
-          description="Apresento o resultado, faço ajustes finais para garantir que a solução atenda às necessidades."
-          icon={<AceternityIcon order="Fase 3"/>}>
-          <CanvasRevealEffect
-            animationSpeed={3}
-            containerClassName="bg-sky-600"
-            colors={[[125, 211, 252]]}
-          />
-        </Card>
+          </div>
+
+          <div className="space-y-10 md:space-y-14">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isRight = index % 2 !== 0;
+
+              return (
+                <motion.article
+                  key={step.phase}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.55, delay: 0.08 }}
+                  className="relative grid pl-14 md:grid-cols-2 md:pl-0"
+                >
+                  <div
+                    className={`md:px-12 ${
+                      isRight
+                        ? "md:col-start-2 md:text-left"
+                        : "md:col-start-1 md:row-start-1 md:text-right"
+                    }`}
+                  >
+                    <div className="group relative overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-950/60 p-6 backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_20px_55px_-30px_rgba(34,211,238,0.4)] md:p-8">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(34,211,238,0.10),transparent_42%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                      <div
+                        className={`relative flex flex-col items-start ${
+                          isRight ? "" : "md:items-end"
+                        }`}
+                      >
+                        <span className="text-xs font-bold uppercase tracking-[0.22em] text-brand">
+                          {step.phase}
+                        </span>
+                        <h2 className="mt-3 text-xl font-bold leading-tight text-white md:text-2xl">
+                          {step.title}
+                        </h2>
+                        <p className="mt-3 max-w-md text-sm leading-relaxed text-white-100/70 md:text-base">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand/40 bg-black-100 text-brand shadow-[0_0_0_6px_#020617] md:left-1/2 md:-translate-x-1/2">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
-  );
-}
-
-const Card = ({
-  title,
-  icon,
-  children,
-  description
-}: {
-  title: string;
-  icon: React.ReactNode;
-  children?: React.ReactNode;
-  description: string;
-}) => {
-  const [hovered, setHovered] = React.useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2]  max-w-sm w-full mx-auto p-4 relative lg:h-[35rem] rounded-3xl"
-    >
-      <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
-
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="h-full w-full absolute inset-0"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="relative z-20">
-        <div className="text-center group-hover/canvas-card:-translate-y-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover/canvas-card:opacity-0 transition duration-200 w-full  mx-auto flex items-center justify-center">
-          {icon}
-        </div>
-        <h2 className="dark:text-white opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4  font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 text-center text-3xl">
-          {title}
-        </h2>
-         <h2 className="dark:text-white text-sm opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4  font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 text-center"
-          style={{color: '#E4ECFF'}}
-         >
-          {description}
-        </h2> 
-      </div>
-    </div>
-  );
-};
-
-const AceternityIcon = ({ order } : { order: string }) => {
-  return (
-    <div>
-      <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-5 py-2 text-white backdrop-blur-3xl text-2xl font-bold">
-          {order}
-        </span>
-      </button>
-    </div>
-  );
-};
-
-export const Icon = ({ className, ...rest }: any) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className={className}
-      {...rest}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-    </svg>
   );
 };
 
